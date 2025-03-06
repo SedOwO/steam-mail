@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file path
-LOG_FILE="/home/shashank/Desktop/steam-tracker/log/tracker.log"
+LOG_FILE="/home/shashank/Desktop/steam-tracker/log/steam_tracker.log"
 
 # Game IDs
 declare -A GAME_IDS
@@ -12,10 +12,12 @@ GAME_IDS=(
 CURRENCY="IN"
 
 # Email Configuration
-EMAIL_SENDER="your-email@gmail.com"
-EMAIL_RECEIVER="your-email@gmail.com"
+EMAIL_SENDER="shashank21dark@gmail.com"
+EMAIL_RECEIVER="shashank21lazer@gmail.com"
 SMTP_SERVER="smtp.gmail.com"
 SMTP_PORT=587
+
+THREASHOLD=50
 
 # Function to log messages
 log_message() {
@@ -50,9 +52,19 @@ send_email() {
     local subject="🔥 Steam Sale Alert: ${game} is ${discount}% Off!"
     local body="The game '${game}' is now available at ₹${price} with a discount of ${discount}%!\n\nCheck it here: https://store.steampowered.com/app/${GAME_IDS[$game]}/"
     
-    echo -e "Subject:${subject}\n\n${body}" | sendmail -v "$EMAIL_RECEIVER"
+    # Create the email message
+    {
+        echo "Subject: ${subject}"
+        echo "To: ${EMAIL_RECEIVER}"
+        echo "From: ${EMAIL_SENDER}"
+        echo "Content-Type: text/plain; charset=UTF-8"
+        echo
+        echo -e "$body"
+    } | msmtp --debug --account=gmail "$EMAIL_RECEIVER" >/dev/null 2>&1
+
     log_message "✅ Email sent for ${game}: ₹${price} (${discount}% off)"
 }
+
 
 # Main loop to check game prices
 for game in "${!GAME_IDS[@]}"; do
@@ -62,7 +74,7 @@ for game in "${!GAME_IDS[@]}"; do
     if [[ "$price" != "null" ]]; then
         message="${game}: ₹${price} (${discount}% off)"
         log_message "$message"
-        if (( discount > 50 )); then
+        if (( discount > $THREASHOLD )); then
             send_email "$game" "$price" "$discount"
         fi
     else
