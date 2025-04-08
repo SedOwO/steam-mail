@@ -1,25 +1,28 @@
 #!/bin/bash
 
 # Log file path: change this as needed
-LOG_FILE="/home/shashank/Desktop/steam-tracker/log/steam_tracker.log"
+LOG_FILE="/home/shashank/custom-scripts/steam-tracker/logs/steam_tracker.log"
 
 # Change this to your email address
-EMAIL_RECEIVER="yourmail@example.com"
+EMAIL_RECEIVER="shashank21lazer@gmail.com"
 
 # Game IDs(inclued requried game IDs here)
 declare -A GAME_IDS
 GAME_IDS=(
     ["Left_4_Dead"]=500
     ["Left_4_Dead_2"]=550
+    ["Half_life"]=70
+    ["Half_life_2"]=220
 )
 
-#------------DO NOT EDIT BELOW THIS LINE------------#
+#---------------------------------DO NOT EDIT BELOW THIS LINE-----------------------------------#
 
 # Email Configuration
 SMTP_SERVER="smtp.gmail.com"
 SMTP_PORT=587
 THRESHOLD=5
 CURRENCY="IN"
+EMAIL_SENDER="turbomailer3000@gmail.com"
 
 # Function to log messages
 log_message() {
