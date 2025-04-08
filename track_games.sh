@@ -75,6 +75,9 @@ send_email() {
 # Array to store discounted games
 DISCOUNTED_GAMES=()
 
+# Display current date and time
+log_message "Time: $(date)"
+
 # Main loop to check game prices
 for game in "${!GAME_IDS[@]}"; do
     app_id=${GAME_IDS[$game]}

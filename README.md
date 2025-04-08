@@ -115,5 +115,14 @@ Add the following line to check for sales every day at 10 AM:
     ```
 - Ensure App Password is used instead of the real password.
 
+## systemd configuration
+
+Create a file `/etc/systemd/system/steam-tracker.service`
 
 
+## Enable and start the service
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable steam-tracker.service
+```
