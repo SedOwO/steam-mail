@@ -1,0 +1,14 @@
+[Unit]
+Description=Run steam-tracker after network is online
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/shashank/custom-scripts/steam-tracker/track_games.sh
+User=shashank
+Environment=HOME=/home/shashank
+WorkingDirectory=/home/shashank
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
