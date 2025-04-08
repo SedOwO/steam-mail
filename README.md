@@ -48,14 +48,10 @@ sudo yum install msmtp -y                     # RHEL/CentOS
     ```
 
 ## Usage
-1. Set environment variables in your script:
+1. Set environment variables in config file `games.config`(refer games.config.sample):
     ```bash
     EMAIL_SENDER="your-email@gmail.com"
     EMAIL_RECEIVER="recipient@example.com"
-    declare -A GAME_IDS=(
-        ["Left_4_Dead_2"]="500"
-        ["Overcooked_2"]="728880"
-    )
     ```
 2. Run the script manually or via cron:
     ```bash

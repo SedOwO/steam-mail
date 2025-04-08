@@ -1,0 +1,2 @@
+EMAIL_RECEIVER="receiver@example.com"
+EMAIL_SENDER="sendersmtp@example.com"
